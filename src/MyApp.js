@@ -1,7 +1,7 @@
 // src/MyApp.js
-import React from "react";
 import Table from "./Table";
 import Form from './Form';
+import React, { useState } from 'react';
 
 function MyApp() {
 	const [characters, setCharacters] = useState([]);

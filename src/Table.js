@@ -1,5 +1,6 @@
 // src/Table.js
 
+function Table(props) {
 function TableHeader() {
   return (
     <thead>
@@ -34,7 +35,6 @@ function TableBody() {
    );
 }
 
-function Table(props) {
     return (
      <table>
         <TableHeader />
