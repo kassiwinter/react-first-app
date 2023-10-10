@@ -36,10 +36,17 @@ function MyApp() {
 
 	function updateList(person) { 
     		postUser(person)
-      		.then(() => setCharacters([...characters, person]))
+      		.then((response) => {
+			if (response.status === 201) {
+				return response.json();
+			}
+		})
+		.then ((new_person) => {
+			setCharacters([...characters, new_person]))
+		})
       		.catch((error) => {
         		console.log(error);
-      		})
+      		});
 	}
 
 	useEffect(() => {
