@@ -90,7 +90,13 @@ app.get('/users/:id', (req, res) => {
     }
 });
 
+function randomIDGenerater() {
+    const id = Math.random().toString(36).substring(2);
+    return id;
+}
+
 const addUser = (user) => {
+    user.id = randomIDGenerater();
     users['users_list'].push(user);
     return user;
 }
