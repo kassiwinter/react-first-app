@@ -114,7 +114,9 @@ app.delete('/users/:id', (req, res) => {
     	res.status(404).send('User not found.');
   }
   else {
+       const userIndex = users.users_list.findIndex((user) => user.id === id);
        users.users_list.splice(userIndex, 1);
+       res.status(204).send();
   }
 });
  

@@ -6,11 +6,28 @@ import React, {useState, useEffect} from 'react';
 function MyApp() {
 	const [characters, setCharacters] = useState([]);
  
-	function removeOneCharacter (index) {
-	    const updated = characters.filter((character, i) => {
-	        return i !== index
-	    });
-	  setCharacters(updated);
+	function removeOneCharacter (id, index) {
+	  fetch(`http://localhost:8000/users/${id}`, {method: 'DELETE', })
+	  .then((response) => {
+	  if (response.status === 204) {
+	  	const updated = characters.filter((character, i) => {
+                	return i !== index
+            	});
+          	setCharacters(updated);
+	  }
+
+	  else if (response.status === 404) {
+		 console.error('User not found.');
+	
+	  }
+
+	  else {
+		console.error('Failed to delete user.');
+	  }})
+	 .catch((error) => {
+            console.error(error);
+        });  
+	  
 	}
 	
 	function updateList(person) {
