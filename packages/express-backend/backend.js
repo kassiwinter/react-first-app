@@ -8,9 +8,6 @@ app.use(cors());
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
@@ -45,9 +42,9 @@ const users = {
          job: 'Bartender',
       },
       {
-   	"id": "qwe123",
-   	"job": "Zookeeper",
-   	"name": "Cindy"
+   	    id: "qwe123",
+   	    job: "Zookeeper",
+   	    name: "Cindy"
       }
    ]
 }
@@ -97,13 +94,19 @@ function randomIDGenerater() {
 
 const addUser = (user) => {
     user.id = randomIDGenerater();
-    users['users_list'].push(user);
-    return user;
+    const userToAdd = {
+        id: user.id,
+        name: user.name,
+        job: user.job
+    }
+    users['users_list'].push(userToAdd);
+    return userToAdd;
 }
 
 app.post('/users', (req, res) => {
     const userToAdd = req.body;
     addUser(userToAdd);
+    console.log('Current users data:', users.users_list);
     res.status(201).json(userToAdd);
 });
 
